@@ -2,17 +2,15 @@ from src.present import Present
 
 class ToyMachine:
 
-    def __init__(self, presentsReady):
-        self.__givePresentTo = None
+    def __init__(self, mrsClaus, presentsReady):
+        self.__mrsClaus = mrsClaus
         self.presentsReady = presentsReady
 
-    def elfReady(self, givePresentTo):
-        self.__givePresentTo = givePresentTo
+    def startGivingPresentsToMrsClaus(self):
+        for i in range(self.presentsReady):
+            self.__mrsClaus.givePresentToPack(Present())
+            self.presentsReady = self.presentsReady - 1
 
-    def givePresentToElf(self):
-        if self.__givePresentTo is None: return
-        if self.presentsReady < 1: return
-
-        self.__givePresentTo(Present())
-        self.elfReady(None)
-        self.presentsReady = self.presentsReady - 1
+    def morePresentsReady(self, extraPresents):
+        self.presentsReady = self.presentsReady =+ extraPresents
+        self.startGivingPresentsToMrsClaus()
